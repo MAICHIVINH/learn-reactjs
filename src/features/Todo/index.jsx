@@ -14,12 +14,12 @@ function TodoFeature(props) {
             status: 'new',
         },
         {
-            id: 1,
+            id: 2,
             title: 'Binh',
             status: 'completed',
         },
         {
-            id: 1,
+            id: 3,
             title: 'Cuong',
             status: 'new',
         },

@@ -38,5 +38,4 @@ function TodoList({todoList, onTodoClick}) {
     );
 }
 
-export default
-    TodoList;
+export default TodoList;
