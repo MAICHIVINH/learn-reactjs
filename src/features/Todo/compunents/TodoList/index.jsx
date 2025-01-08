@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import './styles.scss';
 
 TodoList.propTypes = {
-    todoList: PropTypes.array,
-    onTodoClick: PropTypes.func,
+    todoList: PropTypes.array.isRequired,
+    onTodoClick: PropTypes.func.isRequired,
 };
 
 TodoList.defaultProps = {
@@ -13,8 +13,12 @@ TodoList.defaultProps = {
     onTodoClick: null,
 }
 
-function TodoList({todoList, onTodoClick}) {
+function TodoList(props) {
+
+    const { todoList, onTodoClick } = props;
+
     const handleTodoClick = (todo, idx) => {
+
         if (!onTodoClick) return;
 
         onTodoClick(todo, idx);
@@ -22,14 +26,23 @@ function TodoList({todoList, onTodoClick}) {
     
     return (
         <ul className="todo-list" >
+            
             {/* Khi render List phải chỉ định key */}
             {todoList.map((todo, idx) => (
-                <li key={todo.id} className={classnames({
+
+                <li key={todo.id} 
+                
+                className={classNames({
+
                     'todo-item': true,
+
                     completed: todo.status === 'completed' 
+
                 })} 
+
                 onClick={() => handleTodoClick(todo, idx)}
                 >
+
                     {todo.title}
                 </li>
             ))}
