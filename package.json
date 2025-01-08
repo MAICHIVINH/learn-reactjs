@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.5.1",
     "cra-template": "1.2.0",
     "learn-reactjs": "file:",
     "react": "^19.0.0",
