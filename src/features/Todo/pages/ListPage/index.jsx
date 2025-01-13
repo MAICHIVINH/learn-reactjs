@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import TodoList from '../../compunents/TodoList';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
+import TodoForm from '../../compunents/TodoForm';
 
 ListPage.propTypes = {
     
@@ -92,8 +93,15 @@ function ListPage(props) {
     
     // console.log(renderedTodoList);
 
+
+    const handleTodoFormSubmit = (values) => {
+        console.log('Form submit: ', values)
+    };
+
     return (
         <div>
+            <h3>What Todo</h3>
+            <TodoForm onSubmit={handleTodoFormSubmit} />
             <h3>Todo List</h3>
             <TodoList todoList={renderedTodoList} onTodoClick={handleTodoClick} />
 
