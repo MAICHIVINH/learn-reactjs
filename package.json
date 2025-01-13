@@ -6,6 +6,7 @@
     "classnames": "^2.5.1",
     "cra-template": "1.2.0",
     "learn-reactjs": "file:",
+    "query-string": "^9.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^6.28.1",
