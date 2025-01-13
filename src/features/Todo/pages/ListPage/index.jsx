@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import TodoList from '../../compunents/TodoList';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 
 ListPage.propTypes = {
@@ -27,7 +27,7 @@ function ListPage(props) {
 
     ];
     const location = useLocation();
-
+    const navigation = useNavigate();
     const [todoList, setTodoList] = useState(initTodoList);
     const [filteredStatus, setFilteredStatus] = useState(() =>{
         const params = queryString.parse(location.search);
@@ -37,6 +37,10 @@ function ListPage(props) {
         return params.status || 'all';
     });
 
+    useEffect(() =>{
+        const params = queryString.parse(location.search);
+        setFilteredStatus(params.status || 'all');
+    }, [location.search])
     const handleTodoClick = (todo, idx) => {
 
         // clone ra mang moi
@@ -54,16 +58,37 @@ function ListPage(props) {
         setTodoList(newTodoList);
     }
     const handleShowAllClick = () => {
-        setFilteredStatus('all');
+        // setFilteredStatus('all');
+
+        const queryParams ={status: 'all'};
+        navigation({
+            path: '/',
+            search: queryString.stringify(queryParams)
+        });
     }
     const handleShowCompletedClick = () => { 
-        setFilteredStatus('completed');
+        // setFilteredStatus('completed');
+
+        const queryParams ={status: 'completed'};
+        navigation({
+            path: '/',
+            search: queryString.stringify(queryParams)
+        });
     }
     const handleShowNewClick = () => {
-        setFilteredStatus('new');
+        // setFilteredStatus('new');
+
+        const queryParams ={status: 'new'};
+        navigation({
+            path: '/',
+            search: queryString.stringify(queryParams)
+        });
     }
 
-    const renderedTodoList = todoList.filter(todo => filteredStatus === 'all'|| filteredStatus === todo.status);
+        // chức năng này chỉ thay đổi khi todoList hoặc filteredStatus thay đổi giá trị đầu vào bằng cách sử dụng hook useMemo()
+    const renderedTodoList = useMemo(() =>{
+        return todoList.filter(todo => filteredStatus === 'all'|| filteredStatus === todo.status);
+    }, [todoList, filteredStatus]) 
     
     // console.log(renderedTodoList);
 
